@@ -1,23 +1,22 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
 import {Ownable} from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
-contract Box is Ownable{
+contract Box is Ownable {
 
     uint256 public s_number;
 
-    event NumberChanged(uint256);
+    event NumberChanged(uint256 newNumber);
 
-    //constructor() Ownable(msg.sender);
+    constructor() Ownable(msg.sender) {}
 
-    function store (uint256 newNumber) public {
+    function store(uint256 newNumber) public onlyOwner {
         s_number = newNumber;
         emit NumberChanged(newNumber);
     }
 
-    function getNumber() public returns (uint256){
-        s_number;
+    function getNumber() public view returns (uint256) {
+        return s_number;
     }
-    
 }
